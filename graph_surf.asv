@@ -1,7 +1,10 @@
 function graph_surf(X, Y, u, n, min_time, step, max_time, axis_settings)
     TOL = 10^-3;
+    [~, c] = size(axis_settings);
     for i = max_time:-step:min_time
-        axis(axis_settings)
+        if c ~= 0
+            axis(axis_settings)
+        end
         figure();
         W = u(i, :);
         m = abs(max(W));
