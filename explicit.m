@@ -15,13 +15,5 @@ function [ nt, u ] = explicit(n, dx, at, bt, D2, u0 )
     for i=2:nt
         u(i,:) = A_alpha*u(i-1,:)';
     end
-
-%     figure('Name', 'Explicit');
-%     xlabel('x');
-%     ylabel('Time');
-%     surf(xs, t, u, 'EdgeColor','none','LineStyle','none','FaceLighting','phong');
-%     xlabel('x');
-%     ylabel('Time');
-%     zlabel('Tempature');
 end
 

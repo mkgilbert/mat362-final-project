@@ -3,7 +3,7 @@ function solve_laplacian()
     b = 1; % Final x
     t0 = 0; % Initial time
     tf = 0.5; % Final time
-    n = 20; % Size of n
+    n = 25; % Size of n
     nt = 25; % Number of time steps (except in explicit/C-N)
     dx = (b-a)/n;
     x = linspace(a, b, n+1);
@@ -36,12 +36,12 @@ function solve_laplacian()
     
     % explicit
     %[t_total, u] = explicit(n, dx, t0, tf, D2, u0);
-    %step = ceil(t_total/40);
-    %graph_surf(X, Y, u, n, 50, step, t_total, axis_settings);
+    %step = ceil(t_total/20);
+    %graph_surf(X, Y, u, n, 1, step, t_total, axis_settings);
     
     % method of lines
-    t0 = 25;  % reset values because mol wasn't working with the original ones
-    tf = 55;
+    t0 = 40;  % reset values because mol wasn't working with the original ones
+    tf = 80;
     t_total = ceil((tf-t0)/(0.24*dx^2));
     step = ceil(t_total/10);
     F = @(t, u) D2*u;

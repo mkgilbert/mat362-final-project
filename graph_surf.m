@@ -5,13 +5,12 @@ function graph_surf(X, Y, u, n, min_time, step, max_time, axis_settings)
         if c ~= 0
             axis(axis_settings)
         end
-        figure();
         W = u(i, :);
-        m = abs(max(W));
         % don't keep going through the loop if Z axis is close to 0
         if abs(max(W)) <= TOL
-            break;
+            continue;
         end
+        figure();
         W = reshape(W, n-1, n-1);
 
         % padd the W matrix with 0s around all edges
@@ -19,6 +18,9 @@ function graph_surf(X, Y, u, n, min_time, step, max_time, axis_settings)
         q = [zeros(1, n-1); W; zeros(1, n-1)];
         r = zeros(n+1, 1);
         W = [p, q, r];
-        surf(X, Y, W);
-     end
+        surf(X, Y, W, 'EdgeColor','none','LineStyle','none','FaceLighting','phong');
+        xlabel('x');
+        ylabel('Time');
+        zlabel('Temp');
+    end
 end

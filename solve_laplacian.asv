@@ -8,7 +8,7 @@ function solve_laplacian()
     dx = (b-a)/n;
     x = linspace(a, b, n+1);
     xs = x(2: end-1);
-    axis_settings = [a b a b 0 20];
+    axis_settings = [a b a b 0 15];
     
     f = @(x, y) sin(pi^2*x)*sin(pi^2*y);
     
@@ -26,8 +26,8 @@ function solve_laplacian()
     
     % solve using 4 different methods
     % implicit
-    %u = implicit(n, dx, t0, tf, nt, D2, u0);
-    %graph_surf(X, Y, u, n, 1, 1, nt, axis_settings);
+    u = implicit(n, dx, t0, tf, nt, D2, u0);
+    graph_surf(X, Y, u, n, 1, 1, nt, axis_settings);
     
     % crank nicolson
     %[t_total, u] = crank_nicolson(n, dx, t0, tf, D2, u0);
@@ -36,11 +36,15 @@ function solve_laplacian()
     
     % explicit
     %[t_total, u] = explicit(n, dx, t0, tf, D2, u0);
-    %step = ceil(t_total/40);
-    %graph_surf(X, Y, u, n, 50, step, t_total, axis_settings);
+    %step = ceil(t_total/20);
+    %graph_surf(X, Y, u, n, 1, step, t_total, axis_settings);
     
     % method of lines
-    F = @(t, u) D2*u;
-    u = mol(t0, tf, 50, F, u0);
-    graph_surf(X, Y, u, n, 1, 2, 25, []);
+%     t0 = 25;  % reset values because mol wasn't working with the original ones
+%     tf = 55;
+%     t_total = ceil((tf-t0)/(0.24*dx^2));
+%     step = ceil(t_total/10);
+%     F = @(t, u) D2*u;
+%     u = mol(t0, tf, t_total, F, u0);
+%     graph_surf(X, Y, u, n, 1, step, t_total, axis_settings);
 end
