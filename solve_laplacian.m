@@ -24,9 +24,12 @@ function solve_laplacian()
     % define x and y values for the graphs
     [X, Y] = meshgrid(x, x);
     
-    u = implicit(n, dx, t0, tf, nt, D2, u0);
-    step = 1;
-    graph_surf(X, Y, u, n, 1, step, nt, axis_settings);
+    %u_imp = implicit(n, dx, t0, tf, nt, D2, u0);
+    [t_cn, u_cn] = crank_nicolson(n, dx, t0, tf, D2, u0);
+    
+    %graph_surf(X, Y, u_imp, n, 1, 1, nt, axis_settings);
+    graph_surf(X, Y, u_cn, n, 1, ceil(t_cn/20), t_cn, axis_settings);
+    
 %     [t_total, u] = explicit(n, dx, t0, tf, D2, u0);
 %     step = ceil(t_total/40);
 %     axis_settings = [a b a b 0 20];
